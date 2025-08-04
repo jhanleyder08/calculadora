@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="calculator-icon">🧮</div>
+        <h1>Laboratorio 3 Calculadora </h1>
+        
+        <div class="buttons-container">
+            <button onclick="probarCalculadora()">Probar calculadora con prompt</button>
+            <button onclick="iniciarCalculadora()">Iniciar calculadora completa</button>
+        </div>
+    </div>
+        <script>
+            // Paso 1: Declaración de Variables
+            let num1 = 10;
+            let num2 = 5;
+            let operacion = "sumar";
+
+            function sumar(num1, num2) {
+                return num1 + num2;
+            }
+            function restar(num1, num2) {
+                return num1 - num2;
+            }
+            function multiplicar(num1, num2) {
+                return num1 * num2;
+            }
+            function dividir  (num1, num2) {
+                return num1 / num2;
+            } 
+            function  realizarOperacion(num1, num2, operacion ){
+                // Paso 3: Validación división por cero
+                if (operacion == "dividir" && num2 == 0) {
+                    return "Error: No se puede dividir por cero";
+                }
+                
+                if (operacion == "sumar") {
+                return resultado = sumar(num1, num2);
+            } else if (operacion == "restar") {
+                return resultado = restar (num1, num2);
+            } else if (operacion == "multiplicar") {
+                return resultado = multiplicar(num1, num2);
+            } else if (operacion == "dividir") {
+                return resultado = dividir(num1, num2);
+            } else {
+                alert("operacion no valida");
+                return "operacion no valida";
+            }
+            
+            }
+            function probarCalculadora(){
+                num1 =parseInt (prompt("ingrese el primer numero"));
+                num2 = parseInt (prompt("ingrese el segundo numero"));
+                operacion = prompt("ingrese la operacion a realizar sumar, restar, dividir, multiplicar");
+                resultado = realizarOperacion(num1, num2, operacion);
+                alert("el resultado es " + resultado);
+            };
+
+            // Paso 4: Bucle para múltiples operaciones
+            function iniciarCalculadora() {
+                let continuar = true;
+                
+                while (continuar) {
+                    num1 = parseInt(prompt("ingrese el primer numero"));
+                    num2 = parseInt(prompt("ingrese el segundo numero"));
+                    operacion = prompt("ingrese la operacion a realizar sumar, restar, dividir, multiplicar o 'salir'");
+                    
+                    // Paso 5: Condición de salida
+                    if (operacion == "salir") {
+                        alert("Gracias por usar la calculadora!");
+                        continuar = false;
+                    } else {
+                        resultado = realizarOperacion(num1, num2, operacion);
+                        alert("el resultado es " + resultado);
+                        
+                        let seguir = confirm("¿Desea realizar otra operacion?");
+                        if (!seguir) {
+                            continuar = false;
+                        }
+                    }
+                }
+            }
+        </script>
+        <footer>
+        <p class="footer-content">&copy; Jhan Leyder Duarte M.</p>
+    </footer>
+</body>
+</html>

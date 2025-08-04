@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<h1>Laboratorio de Ciclos en JavaScript</h1>
+
+    <h2>Parte 1: (40 minutos) Bucle 'for'</h2>
+
+    <p>Escribe un código que recorra un arreglo de números y calcule la suma total.</p>
+
+    <pre>
+// Arreglo de números
+let numeros = [10, 25, 30, 15, 40, 20];
+let suma = 0;
+
+// Bucle for para recorrer el arreglo
+for (let i = 0; i < numeros.length; i++) {
+    suma += numeros[i];
+}
+
+console.log("La suma total es: " + suma);
+    </pre>
+
+    <button onclick="ejecutarParte1()">Ejecutar código</button>
+    <div id="resultado1" style="display: none; border: 1px solid black; padding: 10px; margin: 10px 0;"></div>
+
+    <p><strong>Pregunta:</strong> ¿Cómo se modifica el código para calcular el promedio de los números?</p>
+
+    <button onclick="mostrarPromedio()">Ver respuesta</button>
+    <div id="respuesta1" style="display: none; border: 1px solid black; padding: 10px; margin: 10px 0;"></div>
+
+    <h2>Parte 2: (40 minutos) Bucle 'while'</h2>
+
+    <p>Crea un bucle 'while' que solicite al usuario ingresar un número hasta que ingrese un número negativo.</p>
+
+    <pre>
+let numero = 0;
+let contador = 0;
+let suma = 0;
+
+// Bucle while que continúa hasta que se ingrese un número negativo
+while (numero >= 0) {
+    numero = parseFloat(prompt("Ingresa un número (negativo para terminar):"));
+
+    if (numero >= 0) {
+        suma += numero;
+        contador++;
+    }
+}
+
+console.log("Se ingresaron " + contador + " números positivos con una suma de " + suma);
+    </pre>
+
+    <p>Versión interactiva:</p>
+    <input type="number" id="numeroInput" placeholder="Ingresa un número">
+    <button onclick="agregarNumero()">Agregar número</button>
+    <button onclick="terminarBucle()">Terminar (número negativo)</button>
+    <button onclick="reiniciar()">Reiniciar</button>
+    <div id="resultado2" style="display: none; border: 1px solid black; padding: 10px; margin: 10px 0;"></div>
+
+    <p><strong>Pregunta:</strong> ¿Qué sucede si se inicializa el contador con un valor negativo?</p>
+
+    <button onclick="mostrarRespuesta2()">Ver respuesta</button>
+    <div id="respuesta2" style="display: none; border: 1px solid black; padding: 10px; margin: 10px 0;"></div>
+
+    <h2>Parte 3: (40 minutos) Bucle 'do...while'</h2>
+
+    <p>Implementa un programa que pida al usuario que ingrese una contraseña hasta que sea correcta.</p>
+
+    <pre>
+const contraseñaCorrecta = "javascript123";
+let contraseñaIngresada;
+let intentos = 0;
+
+// Bucle do...while que se ejecuta al menos una vez
+do {
+    contraseñaIngresada = prompt("Ingresa la contraseña:");
+    intentos++;
+
+    if (contraseñaIngresada !== contraseñaCorrecta) {
+        alert("Contraseña incorrecta. Intenta de nuevo.");
+    }
+
+} while (contraseñaIngresada !== contraseñaCorrecta);
+
+alert("¡Bienvenido! Acceso concedido en el intento " + intentos);
+    </pre>
+
+    <p>Versión interactiva:</p>
+    <input type="password" id="passwordInput" placeholder="Ingresa la contraseña">
+    <button onclick="verificarPassword()">Verificar contraseña</button>
+    <button onclick="reiniciarPassword()">Reiniciar</button>
+    <p><em>Pista: La contraseña es "javascript123"</em></p>
+    <div id="resultado3" style="display: none; border: 1px solid black; padding: 10px; margin: 10px 0;"></div>
+
+    <p><strong>Pregunta:</strong> ¿Por qué se usa un bucle 'do...while' en este caso en lugar de 'while'?</p>
+
+    <button onclick="mostrarRespuesta3()">Ver respuesta</button>
+    <div id="respuesta3" style="display: none; border: 1px solid black; padding: 10px; margin: 10px 0;"></div>
+
+
+
+
+    <script>
+        // Variables para Parte 2
+        let numeros = [];
+        let suma = 0;
+        let contador = 0;
+
+        // Variables para Parte 3
+        let intentos = 0;
+
+        // Parte 1
+        function ejecutarParte1() {
+            let arreglo = [10, 25, 30, 15, 40, 20];
+            let total = 0;
+            let resultado = "Ejecutando bucle for:\n\n";
+
+            for (let i = 0; i < arreglo.length; i++) {
+                total += arreglo[i];
+                resultado += "Posición " + i + ": " + arreglo[i] + "\n";
+            }
+
+            resultado += "\nLa suma total es: " + total;
+            document.getElementById('resultado1').style.display = 'block';
+            document.getElementById('resultado1').innerText = resultado;
+        }
+
+        function mostrarPromedio() {
+            let resultado = "Para calcular el promedio, se modifica así:\n\n";
+            resultado += "let promedio = suma / numeros.length;\n";
+            resultado += "console.log('El promedio es: ' + promedio);\n\n";
+            resultado += "Ejemplo: suma = 140, cantidad = 6\n";
+            resultado += "Promedio = 140 / 6 = 23.33";
+
+            document.getElementById('respuesta1').style.display = 'block';
+            document.getElementById('respuesta1').innerText = resultado;
+        }
+
+        // Parte 2
+        function agregarNumero() {
+            let input = document.getElementById('numeroInput');
+            let numero = parseFloat(input.value);
+
+            if (isNaN(numero)) {
+                alert('Ingresa un número válido');
+                return;
+            }
+
+            if (numero >= 0) {
+                numeros.push(numero);
+                suma += numero;
+                contador++;
+
+                let resultado = "Números ingresados: " + numeros.join(', ') + "\n";
+                resultado += "Total de números: " + contador + "\n";
+                resultado += "Suma: " + suma;
+
+                document.getElementById('resultado2').style.display = 'block';
+                document.getElementById('resultado2').innerText = resultado;
+                input.value = '';
+            } else {
+                terminarBucle();
+            }
+        }
+
+        function terminarBucle() {
+            let resultado = "Bucle terminado!\n\n";
+            resultado += "Se ingresaron " + contador + " números positivos\n";
+            resultado += "Suma total: " + suma;
+
+            document.getElementById('resultado2').style.display = 'block';
+            document.getElementById('resultado2').innerText = resultado;
+        }
+
+        function reiniciar() {
+            numeros = [];
+            suma = 0;
+            contador = 0;
+            document.getElementById('numeroInput').value = '';
+            document.getElementById('resultado2').style.display = 'none';
+        }
+
+        function mostrarRespuesta2() {
+            let resultado = "Si se inicializa el contador con valor negativo:\n\n";
+            resultado += "let numero = -1; // Valor negativo\n";
+            resultado += "while (numero >= 0) { ... }\n\n";
+            resultado += "El bucle NUNCA se ejecuta porque la condición\n";
+            resultado += "(numero >= 0) es falsa desde el inicio.\n";
+            resultado += "-1 no es mayor o igual a 0.";
+
+            document.getElementById('respuesta2').style.display = 'block';
+            document.getElementById('respuesta2').innerText = resultado;
+        }
+
+        // Parte 3
+        function verificarPassword() {
+            let input = document.getElementById('passwordInput');
+            let password = input.value;
+            intentos++;
+
+            let resultado = "Intento " + intentos + ": ";
+
+            if (password === "javascript123") {
+                resultado += "¡Contraseña correcta!\n";
+                resultado += "Acceso concedido en el intento " + intentos;
+            } else {
+                resultado += "Contraseña incorrecta";
+            }
+
+            document.getElementById('resultado3').style.display = 'block';
+            document.getElementById('resultado3').innerText = resultado;
+            input.value = '';
+        }
+
+        function reiniciarPassword() {
+            intentos = 0;
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('resultado3').style.display = 'none';
+        }
+
+        function mostrarRespuesta3() {
+            let resultado = "Se usa 'do...while' en lugar de 'while' porque:\n\n";
+            resultado += "- do...while ejecuta el código AL MENOS una vez\n";
+            resultado += "- while evalúa la condición ANTES de ejecutar\n";
+            resultado += "- Para pedir una contraseña, necesitamos preguntar\n";
+            resultado += "  al menos una vez, sin importar la condición inicial";
+
+            document.getElementById('respuesta3').style.display = 'block';
+            document.getElementById('respuesta3').innerText = resultado;
+        }
+    </script>
+    
+</body>
+</html>
