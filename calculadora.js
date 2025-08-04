@@ -1,42 +1,47 @@
 // Paso 1: Declaración de Variables
 let num1 = 10;
 let num2 = 5;
-let operacion = "suma";
+let operacion = "sumar";
 
-// Funciones básicas de operaciones
 function sumar(num1, num2) {
     return num1 + num2;
 }
-
 function restar(num1, num2) {
     return num1 - num2;
 }
-
 function multiplicar(num1, num2) {
     return num1 * num2;
 }
-
 function dividir(num1, num2) {
     return num1 / num2;
-}
+} 
 
-// Paso 2 y 3: Función principal con validaciones
 function realizarOperacion(num1, num2, operacion) {
-    if (operacion === "division" && num2 === 0) {
+    // Paso 3: Validación división por cero
+    if (operacion == "dividir" && num2 == 0) {
         return "Error: No se puede dividir por cero";
     }
     
-    if (operacion === "suma") {
+    if (operacion == "sumar") {
         return sumar(num1, num2);
-    } else if (operacion === "resta") {
+    } else if (operacion == "restar") {
         return restar(num1, num2);
-    } else if (operacion === "multiplicacion") {
+    } else if (operacion == "multiplicar") {
         return multiplicar(num1, num2);
-    } else if (operacion === "division") {
+    } else if (operacion == "dividir") {
         return dividir(num1, num2);
     } else {
-        return "Error: Operación no válida";
+        alert("operacion no valida");
+        return "operacion no valida";
     }
+}
+
+function probarCalculadora() {
+    num1 = parseInt(prompt("ingrese el primer numero"));
+    num2 = parseInt(prompt("ingrese el segundo numero"));
+    operacion = prompt("ingrese la operacion a realizar sumar, restar, dividir, multiplicar");
+    resultado = realizarOperacion(num1, num2, operacion);
+    alert("el resultado es " + resultado);
 }
 
 // Paso 4: Bucle para múltiples operaciones
@@ -44,16 +49,25 @@ function iniciarCalculadora() {
     let continuar = true;
     
     while (continuar) {
-        let num1 = parseFloat(prompt("Ingrese el primer número:"));
-        let num2 = parseFloat(prompt("Ingrese el segundo número:"));
-        let operacion = prompt("Ingrese la operación o 'salir':");
+        num1 = parseInt(prompt("ingrese el primer numero"));
+        num2 = parseInt(prompt("ingrese el segundo numero"));
+        operacion = prompt("ingrese la operacion a realizar sumar, restar, dividir, multiplicar o 'salir'");
         
-        if (operacion === "salir") {
-            alert("¡Hasta luego!");
-            continuar = false;
+        // Paso 5: Condición de salida
+        if (operacion == "salir") {
+            alert("¡Gracias por usar la calculadora! Hasta luego 👋");
+            continuar = false;  // Termina el bucle inmediatamente
         } else {
-            let resultado = realizarOperacion(num1, num2, operacion);
-            alert("Resultado: " + resultado);
+            resultado = realizarOperacion(num1, num2, operacion);
+            alert("el resultado es " + resultado);
+            
+            // Solo pregunta si quiere continuar cuando NO es "salir"
+            let seguir = confirm("¿Desea realizar otra operacion?");
+            if (!seguir) {
+                alert("¡Gracias por usar la calculadora!");
+                continuar = false;
+            }
         }
     }
 }
+
